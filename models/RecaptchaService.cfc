@@ -62,7 +62,7 @@ component singleton accessors="true"{
 		if( !structKeyExists(check, "riskAnalysis") ){
 			return false;
 		}
-		return (check.riskAnalysis.score > variables.score);
+		return (check.riskAnalysis.score >= variables.score);
 	}
 
 	/**
