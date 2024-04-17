@@ -4,7 +4,7 @@ This module contains helpers for using Google's ReCAPTCHA Enterprise API.
 
 reCAPTCHA Enterprise is a service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
 
-reCAPTCHA v3 returns a score for each request without user friction. The score is based on interactions with your site and enables you to take an appropriate action for your site. Register reCAPTCHA v3 keys here: https://g.co/recaptcha/v3.
+reCAPTCHA Enterprise returns a score for each request without user friction. The score is based on interactions with your site and enables you to take an appropriate action for your site. 
 
 ## LICENSE
 
