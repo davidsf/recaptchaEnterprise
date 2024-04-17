@@ -1,0 +1,35 @@
+{
+    "name":"Recaptcha Enterprise Google",
+    "version":"1.0.0",
+    "author":"David Sedeño <frimost@gmail.com>",
+    "homepage":"https://github.com/davidsf/recaptchaEnterprise",
+    "documentation":"https://github.com/davidsf/recaptchaEnterprise/blob/master/README.md",
+    "location":"forgeboxStorage",
+    "repository":{
+        "type":"git",
+        "URL":"https://github.com/davidsf/recaptchaEnterprise"
+    },
+    "slug":"recaptchaenterprise",
+    "shortDescription":"The Invisible reCAPTCHA. It provides a viewlet to add it to any form, the API interface and a Validator for use with cbvalidation",
+    "type":"modules",
+    "packageDirectory":"recaptchaEnterprise",
+    "keywords":[
+        "recaptcha"
+    ],
+    "dependencies":{
+        "cbvalidation":"^3.1.1+186"
+    },
+    "contributors":[
+        "Javier Quintero <jquintero@ortussolutions.com>",
+        "Luis Majano <lmajano@ortussolutions.com>",
+        "Dave <dave@angrysam.com>",
+        "Sean Daniels <sdaniels@padawan.net>"
+    ],
+    "ignore":[
+        "**/.*",
+        "test-harness"
+    ],
+    "installPaths":{
+        "cbvalidation":"modules/cbvalidation/"
+    }
+}
