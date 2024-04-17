@@ -5,7 +5,7 @@
 </cfscript>
 <cfoutput>
 	<cfif isNull( prc.recaptcha_inited ) && args.loadRecaptchaApi>
-    <cfset scriptUrl = getModuleSettings( "recaptchaEnterprise" ).scriptURL & "?render=" & getModuleSettings( "recaptchaEnterprise" ).siteKey >
+		<cfset scriptUrl = getModuleSettings( "recaptchaEnterprise" ).scriptURL & "?render=" & getModuleSettings( "recaptchaEnterprise" ).siteKey >
 		<script type="text/javascript" src="#scriptURL#" defer></script>
 		<cfset prc.recaptcha_inited = true>
 	</cfif>

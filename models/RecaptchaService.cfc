@@ -16,10 +16,10 @@ component singleton accessors="true"{
 	*/
 	property name="siteKey" 	default="";
 
-  /**
-   * The project Google project api url
-   */
-  property name="googleApiUrl" default="";
+	/**
+	* The project Google project api url
+	*/
+	property name="googleApiUrl" default="";
 
 	/**
 	 * Constructor
@@ -41,12 +41,12 @@ component singleton accessors="true"{
 	function onDIComplete(){
 		variables.siteKey = variables.config.siteKey;
 		variables.apiKey  = variables.config.apiKey;
-    variables.score   = variables.config.score;
+		variables.score   = variables.config.score;
 
-    variables.googleApiUrl = variables.config.apiBaseUrl &
-                             variables.config.projectId &
-                             "/assessments?key=" &
-                             variables.config.apiKey;
+		variables.googleApiUrl = variables.config.apiBaseUrl &
+					 variables.config.projectId &
+					 "/assessments?key=" &
+					 variables.config.apiKey;
 	}
 
 	/**
@@ -59,10 +59,10 @@ component singleton accessors="true"{
 
 		var check = deserializeJSON( result.filecontent );
 
-    if( !structKeyExists(check, "riskAnalysis") ){
-      return false;
-    }
-    return (check.riskAnalysis.score > variables.score);
+		if( !structKeyExists(check, "riskAnalysis") ){
+			return false;
+		}
+		return (check.riskAnalysis.score > variables.score);
 	}
 
 	/**
@@ -71,24 +71,24 @@ component singleton accessors="true"{
 	 * @response The Response from the form
 	 */
 	struct function httpSend( required string response ){
-    var event = {
-      "event": {
-        "token": arguments.response,
-        "siteKey": "#getSiteKey()#"
-      }
-    }
+		var event = {
+			"event": {
+			"token": arguments.response,
+			"siteKey": "#getSiteKey()#"
+			}
+		}
 
-    var httpService = new http(
+		var httpService = new http(
 			method  = "post",
 			url 	= variables.googleApiUrl,
 			timeout = 10
 		);
 
-    httpService.addParam( type="header",    name="Content-Type", value="application/json");
-    httpService.addParam( type="body", value=serializeJSON(event));
-    if( !isEmpty(config.referer) ){
-      httpService.addParam( type="header", name="referer", value=config.referer);
-    }
+		httpService.addParam( type="header",    name="Content-Type", value="application/json");
+		httpService.addParam( type="body", value=serializeJSON(event));
+		if( !isEmpty(config.referer) ){
+			httpService.addParam( type="header", name="referer", value=config.referer);
+		}
 		return httpService.send().getPrefix();
 	}
 }
