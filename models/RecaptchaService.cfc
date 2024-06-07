@@ -4,7 +4,8 @@
 component singleton accessors="true"{
 
 	// DI
-	property name="config" inject="coldbox:modulesettings:recaptchaEnterprise";
+	property name="config"               inject="coldbox:modulesettings:recaptchaEnterprise";
+	property name="inteceptorService"    inject="coldbox:interceptorService";
 
 	/**
 	* Google API Key
@@ -44,9 +45,9 @@ component singleton accessors="true"{
 		variables.score   = variables.config.score;
 
 		variables.googleApiUrl = variables.config.apiBaseUrl &
-					 variables.config.projectId &
-					 "/assessments?key=" &
-					 variables.config.apiKey;
+                             variables.config.projectId &
+                             "/assessments?key=" &
+                             variables.config.apiKey;
 	}
 
 	/**
@@ -59,10 +60,31 @@ component singleton accessors="true"{
 
 		var check = deserializeJSON( result.filecontent );
 
-		if( !structKeyExists(check, "riskAnalysis") ){
-			return false;
-		}
-		return (check.riskAnalysis.score >= variables.score);
+    if( !structKeyExists(check, "riskAnalysis") ){
+      variables.inteceptorService.announce(
+        state = 'onRecaptchaEnterpriseFail',
+        data  = {
+          checkResponse = check
+        },
+        asyncAll = true
+      );
+
+      return false;
+    }
+
+    if( check.riskAnalysis.score >= variables.score ){
+      return true;
+    } else {
+      variables.inteceptorService.announce(
+        state = 'onRecaptchaEnterpriseFail',
+        data  = {
+          checkResponse = check
+        },
+        asyncAll = true
+      );
+
+      return false;
+    }
 	}
 
 	/**

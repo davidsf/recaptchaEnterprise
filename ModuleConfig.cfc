@@ -1,11 +1,16 @@
 component {
 
 	// Module Properties
+	this.version 		= "1.2.0";
 	this.title 		= "recaptchaEnterprise";
 	this.author 		= "David Sedeño";
 	this.description 	= "Google Recaptcha Enterprise Module";
 
 	function configure(){
+
+		interceptorSettings = {
+			customInterceptionPoints = "onRecaptchaEnterpriseFail"
+		};
 
 		settings = {
 			projectId  = '',

@@ -113,6 +113,39 @@ if ( !recaptchaOK ){
     writeOutput( "Prove you have a soul!" );
 }
 ```
+### Failed Checks Interceptor
+
+The module announce the [custom event](https://coldbox.ortusbooks.com/the-basics/interceptors/custom-events) "onRecaptchaEnterpriseFail" and pass the struct of the response in data.checkResponse. This checkReponse is as follows:
+
+```
+{
+ "event":{
+    "expectedAction":"EXPECTED_ACTION",
+    "hashedAccountId":"ACCOUNT_ID",
+    "siteKey":"KEY_ID",
+    "token":"TOKEN",
+    "userAgent":"(USER-PROVIDED STRING)",
+    "userIpAddress":"USER_PROVIDED_IP_ADDRESS"
+ },
+ "name":"ASSESSMENT_ID",
+ "riskAnalysis":{
+   "reasons":[],
+   "score":"SCORE"
+ },
+ "tokenProperties":{
+   "action":"USER_INTERACTION",
+   "createTime":"TIMESTAMP",
+   "hostname":"HOSTNAME",
+   "invalidReason":"(ENUM)",
+   "valid":(BOOLEAN)
+ }
+}
+```
+
+More info: https://cloud.google.com/recaptcha-enterprise/docs/interpret-assessment-website
+
+
+
 
 ### THANKS
 
